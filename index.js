@@ -40,7 +40,7 @@ async function run() {
 app.get('/',(req,res)=>{
     res.send("hello assignment 11")
 })
-
+/
 app.listen(port,() =>{
     console.log("assigment 11 runnig")
 })
