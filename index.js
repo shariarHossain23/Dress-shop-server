@@ -13,6 +13,7 @@ app.use(express.json())
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.gjc7a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+console.log(uri);
 
 async function run() {
     try {
@@ -20,15 +21,20 @@ async function run() {
       const userCollection = client.db("dress-Shop").collection("dress-collection")
 
     
-    //   post data
+    //   get dress data
       app.get("/dress", async(req,res)=>{
           const query = {}
           const cursor = userCollection.find(query)
           const result = await cursor.toArray()
           res.send(result)
       })
-   
-  
+    // get single dress data
+      app.get("/dress/:id",async(req,res)=>{
+        const dressId = req.params.id
+        const filterId = {_id:ObjectId(dressId)}
+        const query = await userCollection.findOne(filterId)
+        res.send(query)
+    })
 
 
   }
