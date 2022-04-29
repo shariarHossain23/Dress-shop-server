@@ -48,7 +48,7 @@ async function run() {
       res.send(accessToken);
     });
     //   get dress data
-    app.get("/dress", verifyJwt, async (req, res) => {
+    app.get("/userpost", verifyJwt, async (req, res) => {
       const decodedEmail = req.decoded.email;
       const email = req.query.email;
       if (decodedEmail === email) {
@@ -58,6 +58,14 @@ async function run() {
         res.send(result);
       }
     });
+
+    // data all
+    app.get("/dress", async (req, res) => {
+        const query = {};
+        const cursor = userCollection.find(query);
+        const result = await cursor.toArray();
+        res.send(result);
+      })
 
     // post data
     app.post("/dress", async (req, res) => {
