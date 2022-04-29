@@ -27,16 +27,22 @@ async function run() {
           const result = await cursor.toArray()
           res.send(result)
       })
+      // post data
+      app.post("/dress", async(req,res)=>{
+          const query = req.body
+          const result = await userCollection.insertOne(query)
+          res.send(result)
+      })
     // get single dress data
       app.get("/dress/:id",async(req,res)=>{
         const dressId = req.params.id
-        console.log(dressId);
         const filterId = {_id:ObjectId(dressId)}
         const query = await userCollection.findOne(filterId)
         res.send(query)
     })
       app.put("/dress/:id",async(req,res)=>{
         const updateQuantity = req.body
+        console.log(updateQuantity);
         const dressId = req.params.id
         const filterId = {_id:ObjectId(dressId)}
         const options = { upsert: true };
@@ -48,6 +54,7 @@ async function run() {
         const result = await userCollection.updateOne(filterId, updateDoc, options);
         res.send(result)
     })
+    
 
 
   }
