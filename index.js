@@ -112,7 +112,7 @@ run().catch(console.dir);
 
 app.get("/", (req, res) => {
   res.send("hello assignment 11");
-}) /
+}) 
   app.listen(port, () => {
     console.log("assigment 11 runnig");
   });
