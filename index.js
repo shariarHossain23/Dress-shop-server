@@ -33,6 +33,13 @@ async function run() {
           const result = await userCollection.insertOne(query)
           res.send(result)
       })
+      // delete data
+      app.delete("/dress/:id", async(req,res)=>{
+          const id = req.params.id
+          const filterId = {_id:ObjectId(id)}
+          const result = await userCollection.deleteOne(filterId)
+          res.send(result)
+      })
     // get single dress data
       app.get("/dress/:id",async(req,res)=>{
         const dressId = req.params.id
