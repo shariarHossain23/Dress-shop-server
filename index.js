@@ -53,16 +53,9 @@ async function run() {
       })
       // post data
       app.post("/dress",verifyJwt, async(req,res)=>{
-        const decodedEmail = req.decoded.email
-         const email = req.body.email
-         if(decodedEmail === email){
           const query = req.body
           const result = await userCollection.insertOne(query)
           res.send(result)
-         }
-         else{
-          res.status(403).send({message:"forbidden user"})
-         }
       })
       // delete data
       app.delete("/dress/:id", async(req,res)=>{
