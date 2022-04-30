@@ -66,6 +66,15 @@ async function run() {
         const result = await cursor.toArray();
         res.send(result);
       })
+    app.get("/dresspage", async (req, res) => {
+        const limit = Number(req.query.limit)
+        const page = Number(req.query.page)
+        console.log(page);
+        const query = {};
+        const cursor = userCollection.find(query);
+        const result = await cursor.skip(limit * page).limit(limit).toArray();
+        res.send(result);
+      })
 
     // post data
     app.post("/dress", async (req, res) => {
