@@ -66,7 +66,7 @@ async function run() {
         const result = await cursor.toArray();
         res.send(result);
       })
-      // pagination
+      // pagination  page
     app.get("/dresspage", async (req, res) => {
         const limit = Number(req.query.limit)
         const page = Number(req.query.page)
